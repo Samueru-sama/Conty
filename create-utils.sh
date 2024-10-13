@@ -124,9 +124,6 @@ EOF
 echo "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" >> utils/info
 utils="utils_dwarfs.tar.gz"
 
-ls ./utils
-echo "utils is $utils"
-
 tar -zvcf "${utils}" utils
 mv "${script_dir}"/"${utils}" "${script_dir}"/"${utils}".old
 mv "${utils}" "${script_dir}"
