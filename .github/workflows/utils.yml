@@ -28,11 +28,6 @@ jobs:
                  chrono-date python python-mistletoe range-v3 nlohmann-json
 
         build_dwarfs=true ./create-utils.sh
-        tar xf utils_dwarfs.tar.gz
-        rm utils_dwarfs.tar.gz
-        mv utils-bak/* utils
-        tar -zcf utils_dwarfs.tar.gz utils
-
         mkdir dist
         mv ./*.tar.gz dist/
 
