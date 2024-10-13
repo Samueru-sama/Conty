@@ -127,7 +127,7 @@ utils="utils_dwarfs.tar.gz"
 ls ./utils
 echo "utils is $utils"
 
-tar -zcf "${utils}" utils
+tar -zvcf "${utils}" utils
 mv "${script_dir}"/"${utils}" "${script_dir}"/"${utils}".old
 mv "${utils}" "${script_dir}"
 cd "${script_dir}" || exit 1
