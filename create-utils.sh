@@ -125,7 +125,7 @@ zstd ${zstd_version}
 EOF
 
 if [ "${build_dwarfs}" = "true" ]; then
-	echo "dwarfs $(git -C dwarfs rev-parse --short HEAD)-git" >> utils/info
+	echo "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" >> utils/info
 	utils="utils_dwarfs.tar.gz"
 else
 	echo "squashfuse ${squashfuse_version}" >> utils/info
