@@ -14,12 +14,8 @@ script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 # Set to true to compile dwarfs instead of squashfuse
 build_dwarfs=true
-
 squashfuse_version="0.5.2"
 bwrap_version="0.10.0"
-lz4_version="1.10.0"
-zstd_version="1.5.6"
-squashfs_tools_version="4.6.1"
 unionfs_fuse_version="3.3"
 busybox_version="1.36.1"
 bash_version="5.2.32"
@@ -74,6 +70,7 @@ wget "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" -O ./utils/dwarfs-tools
 ln -s dwarfs-tools ./utils/dwarfs
 ln -s dwarfs-tools ./utils/mkdwarfs
 ln -s dwarfs-tools ./utils/dwarfsextract
+chmod +x ./utils/*
 
 mv "${script_dir}"/build-utils/busybox-${busybox_version}/busybox utils
 mv "${script_dir}"/build-utils/bash-${bash_version}/bash utils
@@ -124,14 +121,11 @@ lz4 ${lz4_version}
 zstd ${zstd_version}
 EOF
 
-if [ "${build_dwarfs}" = "true" ]; then
-	echo "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" >> utils/info
-	utils="utils_dwarfs.tar.gz"
-else
-	echo "squashfuse ${squashfuse_version}" >> utils/info
-	echo "squashfs-tools ${squashfs_tools_version}" >> utils/info
-	utils="utils.tar.gz"
-fi
+echo "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" >> utils/info
+utils="utils_dwarfs.tar.gz"
+
+ls ./utils
+echo "utils is $utils"
 
 tar -zcf "${utils}" utils
 mv "${script_dir}"/"${utils}" "${script_dir}"/"${utils}".old
