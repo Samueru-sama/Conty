@@ -23,9 +23,9 @@ bash_version="5.2.32"
 export CC=clang
 export CXX=clang++
 
-export CFLAGS="-O3 -flto"
+export CFLAGS="-O3 -flto -static"
 export CXXFLAGS="${CFLAGS}"
-export LDFLAGS="-Wl,-O1,--sort-common,--as-needed"
+export LDFLAGS="-Wl,-O1,--sort-common,--as-needed --static"
 
 mkdir -p "${script_dir}"/build-utils
 cd "${script_dir}"/build-utils || exit 1
