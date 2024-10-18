@@ -50,7 +50,7 @@ mkdir utils
 # Download patched bubblewrap (allows launching appimages inside conty) 
 wget "https://bin.ajam.dev/x86_64_Linux/bwrap-patched" -O ./utils/bwrap
 
-wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/busybox/busybox" -O ./busybox
+wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/busybox/busybox" -O ./utils/busybox
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/unionfs-fuse/unionfs" -O ./utils/unionfs
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/unionfs-fuse3/unionfs" -O ./utils/unionfs3
 wget "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" -O ./utils/dwarfs-tools
