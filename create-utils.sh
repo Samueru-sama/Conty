@@ -30,19 +30,7 @@ export LDFLAGS="-Wl,-O1,--sort-common,--as-needed"
 mkdir -p "${script_dir}"/build-utils
 cd "${script_dir}"/build-utils || exit 1
 
-curl -#Lo busybox.tar.bz2 https://busybox.net/downloads/busybox-${busybox_version}.tar.bz2
-curl -#Lo bash.tar.gz https://ftp.gnu.org/gnu/bash/bash-${bash_version}.tar.gz
 cp "${script_dir}"/init.c init.c
-
-tar xf bash.tar.gz
-
-cd ./bash-${bash_version}
-curl -#Lo bash.patch "https://raw.githubusercontent.com/robxu9/bash-static/master/custom/bash-musl-strtoimax-debian-1023053.patch"
-patch -Np1 < ./bash.patch
-CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration -static" CC=musl-gcc ./configure --without-bash-malloc
-autoconf -f
-CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration -static" CC=musl-gcc ./configure --without-bash-malloc
-CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration -static" CC=musl-gcc make -j"$(nproc)"
 
 cd "${script_dir}"/build-utils || exit 1
 mkdir utils
@@ -50,6 +38,7 @@ mkdir utils
 # Download patched bubblewrap (allows launching appimages inside conty) 
 wget "https://bin.ajam.dev/x86_64_Linux/bwrap-patched" -O ./utils/bwrap
 
+wget "https://bin.ajam.dev/x86_64_Linux/bash" -O ./utils/bash
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/busybox/busybox" -O ./utils/busybox
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/unionfs-fuse/unionfs" -O ./utils/unionfs
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/unionfs-fuse3/unionfs" -O ./utils/unionfs3
