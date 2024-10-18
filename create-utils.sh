@@ -34,15 +34,9 @@ curl -#Lo busybox.tar.bz2 https://busybox.net/downloads/busybox-${busybox_versio
 curl -#Lo bash.tar.gz https://ftp.gnu.org/gnu/bash/bash-${bash_version}.tar.gz
 cp "${script_dir}"/init.c init.c
 
-tar xf busybox.tar.bz2
 tar xf bash.tar.gz
 
-cd ./busybox-${busybox_version} || exit 1
-make defconfig
-sed -i 's/# CONFIG_STATIC is not set/CONFIG_STATIC=y/g' .config
-make CC=musl-gcc -j"$(nproc)"
-
-cd ../bash-${bash_version}
+cd ./bash-${bash_version}
 curl -#Lo bash.patch "https://raw.githubusercontent.com/robxu9/bash-static/master/custom/bash-musl-strtoimax-debian-1023053.patch"
 patch -Np1 < ./bash.patch
 CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration -static" CC=musl-gcc ./configure --without-bash-malloc
@@ -52,11 +46,11 @@ CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration -static" CC=musl-gcc 
 
 cd "${script_dir}"/build-utils || exit 1
 mkdir utils
-mv bin/usr/local/bin/bwrap utils
 
 # Download patched bubblewrap (allows launching appimages inside conty) 
 wget "https://bin.ajam.dev/x86_64_Linux/bwrap-patched" -O ./utils/bwrap
 
+wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/busybox/busybox" -O ./busybox
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/unionfs-fuse/unionfs" -O ./utils/unionfs
 wget "https://bin.ajam.dev/x86_64_Linux/Baseutils/unionfs-fuse3/unionfs" -O ./utils/unionfs3
 wget "https://bin.ajam.dev/x86_64_Linux/dwarfs-tools" -O ./utils/dwarfs-tools
