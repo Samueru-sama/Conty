@@ -30,6 +30,7 @@ export LDFLAGS="-Wl,-O1,--sort-common,--as-needed"
 mkdir -p "${script_dir}"/build-utils
 cd "${script_dir}"/build-utils || exit 1
 
+
 cp "${script_dir}"/init.c init.c
 
 cd "${script_dir}"/build-utils || exit 1
