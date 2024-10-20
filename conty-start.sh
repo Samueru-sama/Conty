@@ -533,7 +533,7 @@ if ([ "${USE_SYS_UTILS}" != 1 ] && [ "${utils_size}" -gt 0 ]) || [ "$1" = "-u" ]
 	fi
 
 	if [ "${dwarfs_image}" = 1 ]; then
-		mount_tool="${working_dir}"/utils/dwarfs"${fuse_version}"
+		mount_tool="${working_dir}"/utils/dwarfs
 		extraction_tool="${working_dir}"/utils/dwarfsextract
 		compression_tool="${working_dir}"/utils/mkdwarfs
 	else
@@ -816,6 +816,7 @@ run_bwrap () {
 			--bind-try /run /run \
 			--bind-try /var /var \
 			--bind-try /usr/lib/locale /usr/lib/locale \
+			--bind-try /usr/share/fonts /usr/share/fonts \
 			--ro-bind-try /usr/share/steam/compatibilitytools.d /usr/share/steam/compatibilitytools.d \
 			--ro-bind-try /etc/resolv.conf /etc/resolv.conf \
 			--ro-bind-try /etc/hosts /etc/hosts \
@@ -825,6 +826,7 @@ run_bwrap () {
 			--ro-bind-try /etc/machine-id /etc/machine-id \
 			--ro-bind-try /etc/asound.conf /etc/asound.conf \
 			--ro-bind-try /etc/localtime /etc/localtime \
+  			--cap-add CAP_SYS_ADMIN \
 			"${non_standard_home[@]}" \
 			"${sandbox_params[@]}" \
 			"${custom_home[@]}" \
